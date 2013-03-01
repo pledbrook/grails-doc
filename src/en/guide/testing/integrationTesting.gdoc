@@ -1,6 +1,8 @@
 Integration tests differ from unit tests in that you have full access to the Grails environment within the test. Grails uses an in-memory H2 database for integration tests and clears out all the data from the database between tests.
 
-One thing to bear in mind is that logging is enabled for your application classes, but it is different from logging in tests. So if you have something like this:
+h4. Logging 
+
+One thing to bear in mind is that logging from the tests themselves is different from the logging which is enabled for your application classes. So if you have something like this:
 
 {code:java}
 class MyServiceTests extends GroovyTestCase {
@@ -11,7 +13,7 @@ class MyServiceTests extends GroovyTestCase {
 }
 {code}
 
-the "starting tests" message is logged using a different system than the one used by the application. The @log@ property in the example above is an instance of @java.util.logging.Logger@ (inherited from the base class, not injected by Grails), which doesn't have the same methods as the @log@ property injected into your application artifacts. For example, it doesn't have @debug()@ or @trace()@ methods, and the equivalent of @warn()@ is in fact @warning()@.
+the "starting tests" message is logged using a different system than the one used by the application. The @log@ property in the test class above is an instance of [Logger|api:java.util.logging.Logger] (inherited from the base class, not injected by Grails), which doesn't have the same methods as the @log@ property injected into your application artifacts. For example, it doesn't have @debug()@ or @trace()@ methods, and the equivalent of @warn()@ is in fact @warning()@.
 
 h4. Transactions
 

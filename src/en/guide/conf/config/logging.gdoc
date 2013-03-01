@@ -478,3 +478,7 @@ grails.project.dependency.resolution = {
 {code}
 
 If you do this, you will get unfiltered, standard Java stacktraces in your log files and you won't be able to use the logging configuration DSL that's just been described. Instead, you will have to use the standard configuration mechanism for the library you choose.
+
+h3. Logging from tests
+
+Logging from test classes is performed with a separate type of logger. See [Testing|guide:testing].
