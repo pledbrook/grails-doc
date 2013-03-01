@@ -61,7 +61,7 @@ class MyService {
 }
 {code}
 
-then the name of the logger will be 'grails.app.services.org.example.MyService'.
+then the name of the logger will be 'grails.app.services.org.example.MyService'. This same convention applies to classes in both your application or installed plugins.
 
 For other classes, the typical approach is to store a logger based on the class name in a constant static field:
 
@@ -331,6 +331,10 @@ log4j = {
 {code}
 
 The one place you can't put an environment block is _inside_ the @root@ definition, but you can put the @root@ definition inside an environment block.
+
+{note}
+If you provide a log4j configuration block in a global environment block, that will take precedence over those in an environment block inside a global log4j block. 
+{note}
 
 h3. Full stacktraces
 
