@@ -298,7 +298,7 @@ h3. Environment-specific configuration
 
 Since the logging configuration is inside @Config.groovy@, you can put it inside an environment-specific block. However, there is a problem with this approach: you have to provide the full logging configuration each time you define the @log4j@ setting. In other words, you cannot selectively override parts of the configuration - it's all or nothing.
 
-To get around this, the logging DSL provides its own environment blocks that you can put anywhere in the configuration:
+The logging DSL provides two ways to get around this. The first is a set of environment blocks which can be placed inside a log4j configuration block.:
 
 {code:java}
 log4j = {
@@ -332,8 +332,30 @@ log4j = {
 
 The one place you can't put an environment block is _inside_ the @root@ definition, but you can put the @root@ definition inside an environment block.
 
+The second approach is to provide log4j sub-blocks with named suffixes, like log4j.prod, log4j.dev, etc. where the suffix can be anything you desire. (This is available with Grails 2 and higher). All separate sub-blocks which are active will be merged, so that these can be placed within global environments blocks:
+
+{code}
+log4j.main = {
+ // these settings take effect in all environments
+}
+
+environments {
+ production {
+   log4j.prod = {
+     // these additional settings apply in prod
+   }
+ }
+}
+
+// in an external grails.config.locations file
+log4j.external = {
+ // these settings also apply in all environments
+}
+
+{code}
+
 {note}
-If you provide a log4j configuration block in a global environment block, that will take precedence over those in an environment block inside a global log4j block. 
+If you provide a log4j configuration block (no suffix) in a global environment block, that will take precedence over those in an environment block inside a global log4j (no suffix) block. 
 {note}
 
 h3. Full stacktraces
