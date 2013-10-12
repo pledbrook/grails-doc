@@ -154,6 +154,11 @@ void testDisplay() {
 }
 {code}
 
+Note that the 'model' property will not be set when testing actions that render a template. In other words - if your action passes
+a model to the template, you will not be able to inspect the contents of the 'model' property as you would while testing
+an action that renders a view. Instead it is expected that, if you need to verify a model argument, 
+you will inspect the contents of the rendered template. 
+
 h4. Testing Actions Which Return A Map
 
 When a controller action returns a @java.util.Map@ that @Map@ may be inspected directly to assert that it contains the expected data:
